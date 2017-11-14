@@ -29,6 +29,7 @@ gem 'jbuilder', '~> 2.5'
 # gem 'bcrypt', '~> 3.1.7'
 gem 'pry-rails'
 gem 'annotate'
+gem 'jquery-rails'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
@@ -39,8 +40,8 @@ group :development, :test do
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '~> 2.13'
   gem 'selenium-webdriver'
-  gem 'binding-of-caller'
-  gem 'better-errors'
+  gem 'binding_of_caller'
+  gem 'better_errors'
 end
 
 group :development do
