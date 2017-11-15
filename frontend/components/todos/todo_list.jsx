@@ -7,6 +7,10 @@ import {receiveTodos, receiveTodo} from '../../actions/todo_actions';
 
 class TodoList extends React.Component {
 
+  componentDidMount() {
+    this.props.getTodos();
+  }
+
   render() {
     let {todos} = this.props;
     let todoslist = todos.map((el, idx) =>
@@ -17,7 +21,7 @@ class TodoList extends React.Component {
     return (
       <div>
         <ul>{todoslist}</ul>
-        <TodoForm receiveTodo={this.props.receiveTodo}/>
+        <TodoForm postTodo={this.props.postTodo}/>
       </div>
     );
   }

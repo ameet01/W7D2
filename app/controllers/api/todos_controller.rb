@@ -33,7 +33,9 @@ class Api::TodosController < ApplicationController
     render json: @todo
   end
 
+  private
+
   def todo_params
-    params.require(:todos).permit(:title, :body, :done)
+    params.require(:todo).permit(:title, :body, :done)
   end
 end

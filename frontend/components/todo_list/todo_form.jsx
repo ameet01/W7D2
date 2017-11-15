@@ -15,14 +15,14 @@ class TodoForm extends React.Component {
 
   receiveTodo(e) {
     e.preventDefault();
-    const newLi = {id: uniqueId(), title: this.state.value};
-    this.props.receiveTodo(newLi);
-    this.setState( {value: ''} );
+    const newLi = Object.assign({}, {title: this.state.value, body: "", done: true});
+    this.props.postTodo(newLi).then(() => this.setState({value: ''}));
   }
 
   render() {
     return (
       <form>
+        <div>{this.props.errors}</div>
         <input type="text" onChange={this.handleChange} value={this.state.value}></input>
         <button type="submit" onClick={this.receiveTodo}>Submit</button>
       </form>
