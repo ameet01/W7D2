@@ -21,7 +21,7 @@ class TodoList extends React.Component {
     return (
       <div>
         <ul>{todoslist}</ul>
-        <TodoForm postTodo={this.props.postTodo}/>
+        <TodoForm postTodo={this.props.postTodo} errors={this.props.errors}/>
       </div>
     );
   }

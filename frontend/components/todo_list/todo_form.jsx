@@ -1,37 +1,60 @@
 import React from 'react';
+import ErrorItem from './error_item';
 
 class TodoForm extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { value: ''};
-    this.handleChange = this.handleChange.bind(this);
-    this.receiveTodo = this.receiveTodo.bind(this);
+    this.state = {
+      title: "",
+      body: "",
+      done: false,
+    };
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleChange(e) {
-    let value = e.currentTarget.value;
-    this.setState({value});
+  update(key) {
+    return e => this.setState({ [key]: e.target.value });
   }
 
-  receiveTodo(e) {
+  handleSubmit(e) {
     e.preventDefault();
-    const newLi = Object.assign({}, {title: this.state.value, body: "", done: true});
-    this.props.postTodo(newLi).then(() => this.setState({value: ''}));
+    const todo = Object.assign({}, this.state);
+    this.props.postTodo({ todo }).then(() => this.setState({
+        title: "",
+        body: ""
+      })
+    );
   }
 
   render() {
+
     return (
-      <form>
-        <div>{this.props.errors}</div>
-        <input type="text" onChange={this.handleChange} value={this.state.value}></input>
-        <button type="submit" onClick={this.receiveTodo}>Submit</button>
+      //had to copy solution, took an hour for it to properly create new todo
+      <form className="todo-form" onSubmit={ this.handleSubmit }>
+        <ErrorItem errors={this.props.errors} />
+        <label>Title:
+          <input
+            className="input"
+            ref="title"
+            value={ this.state.title }
+            onChange={ this.update('title') }
+            />
+        </label>
+        <br />
+        <label>Body:
+          <textarea
+            className="input"
+            ref="body"
+            value={ this.state.body }
+            onChange={ this.update('body') }
+            ></textarea>
+        </label>
+
+        <button className="create-button">Create Todo!</button>
       </form>
     );
-  }
-}
 
-function uniqueId() {
-  return new Date().getTime();
+  }
 }
 
 export default TodoForm;

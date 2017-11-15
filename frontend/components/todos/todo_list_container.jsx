@@ -5,7 +5,7 @@ import {receiveTodos, receiveTodo, getTodos, postTodo} from '../../actions/todo_
 
 
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   todos: allTodos(state),
   errors: state.errors
 });

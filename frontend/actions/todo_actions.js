@@ -17,6 +17,10 @@ export const getTodos = () => dispatch => (
   APITodoUtil.getTodos().then(todos => dispatch(receiveTodos(todos)))
 );
 
-export const postTodo = item => dispatch => (
-  APITodoUtil.postTodo(item).then(todo => dispatch(receiveTodo(todo)), err => dispatch(receiveErrors(err.responseJSON)))
+export const postTodo = todo => dispatch => (
+  APITodoUtil.postTodo(todo)
+    .then(
+      todo => dispatch(receiveTodo(todo)),
+      err => dispatch(receiveErrors(err.responseJSON))
+    )
 );

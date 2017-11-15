@@ -1,5 +1,3 @@
-
-
 export const getTodos = () => (
   $.ajax({
     method: 'GET',
