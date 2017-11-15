@@ -11,7 +11,7 @@ class Api::TodosController < ApplicationController
 
   def create
     @todo = Todo.new(todo_params)
-    if(@todo.save)
+    if (@todo.save)
       render json: @todo
     else
       render @todo.errors.full_messages, status: 422
@@ -19,14 +19,21 @@ class Api::TodosController < ApplicationController
   end
 
   def update
-
+    @todo = Todo.find(params[:id])
+    if @todo.update_attributes(todo_params)
+      render json: @todo
+    else
+      render @todo.errors.full_messages
+    end
   end
 
   def destroy
-
+    @todo = Todo.find(params[:id])
+    @todo.destroy
+    render json: @todo
   end
 
   def todo_params
-    params.permit
+    params.require(:todos).permit(:title, :body, :done)
   end
 end
