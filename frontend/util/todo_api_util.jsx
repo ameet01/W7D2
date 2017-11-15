@@ -12,3 +12,18 @@ export const postTodo = todo => (
     data: todo
   })
 );
+
+export const removeTodo = todo => (
+  $.ajax({
+    method: 'DELETE',
+    url: `/api/todos/${todo.id}`,
+  })
+);
+
+export const updateTodo = todo => (
+  $.ajax({
+    method: 'PATCH',
+    url: `/api/todos/${todo.id}`,
+    data: {todo}
+  })
+);

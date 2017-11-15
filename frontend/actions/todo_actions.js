@@ -19,6 +19,9 @@ export const removeTodo = todo => ({
   todo: todo
 });
 
+
+
+
 export const getTodos = () => dispatch => (
   APITodoUtil.getTodos().then(todos => dispatch(receiveTodos(todos)))
 );
@@ -29,4 +32,16 @@ export const postTodo = todo => dispatch => (
       todo => dispatch(receiveTodo(todo)),
       err => dispatch(receiveErrors(err.responseJSON))
     )
+);
+
+export const deleteTodo = todo => dispatch => (
+  APITodoUtil.removeTodo(todo).then(
+    todo => dispatch(removeTodo(todo))
+  )
+);
+
+export const updateTodo = todo => dispatch => (
+  APITodoUtil.updateTodo(todo).then(
+    todo => dispatch(receiveTodo(todo))
+  )
 );
