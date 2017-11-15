@@ -8,8 +8,11 @@ class TodoForm extends React.Component {
       title: "",
       body: "",
       done: false,
+      tag_names: [],
+      newTag: ""
     };
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.addTag = this.addTag.bind(this);
   }
 
   update(key) {
@@ -26,7 +29,22 @@ class TodoForm extends React.Component {
     );
   }
 
+  addTag(e) {
+    this.setState({
+      tag_names: [...this.state.tag_names, this.state.newTag],
+      newTag: ""
+    })
+  }
+
+  update(property) {
+   return e => this.setState({ [property]: e.target.value });
+ }
+
   render() {
+
+    let tag_names = this.state.tag_names.map((tag,idx) => {
+      return <li key={idx}>{tag}</li>;
+    });
 
     return (
       //had to copy solution, took an hour for it to properly create new todo
@@ -49,6 +67,16 @@ class TodoForm extends React.Component {
             onChange={ this.update('body') }
             ></textarea>
         </label>
+        <br/>
+        <br/>
+        <label>
+          Tags
+          <input placeholder='Enter a new tag' value={this.state.newTag} onChange={this.update(`newTag`)}/>
+          <button type='button' onClick={this.addTag}>Add Tag</button>
+        </label>
+        <ul>
+          {tag_names}
+        </ul>
 
         <button className="create-button">Create Todo!</button>
       </form>
